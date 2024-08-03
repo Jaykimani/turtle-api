@@ -8,7 +8,7 @@ const db = new pg.Client({
     user: "postgres",
     host: "localhost",
     database: "Turtle_Organics",
-    password: "**********",
+    password: "sunsetDRIVE98",
     port: 5432
 });
 
@@ -106,6 +106,21 @@ app.get("/addins", async(req, res) => {
         const addins = await db.query("SELECT addin FROM addins");
         addins.rows.map((item)=>{
             itemsArr.push(item.addin);
+            return itemsArr;
+        });
+
+        res.send(itemsArr);
+    } catch (error) {
+        res.send("None found!!")
+    }
+   
+});
+app.get("/salad", async(req, res) => {
+    try {
+        let itemsArr = [];
+        const saladItems = await db.query("SELECT name FROM salad_items");
+        saladItems.rows.map((item)=>{
+            itemsArr.push(item.name);
             return itemsArr;
         });
 
